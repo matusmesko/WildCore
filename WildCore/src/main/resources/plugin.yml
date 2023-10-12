@@ -1,0 +1,4 @@
+name: WildCore
+version: '${project.version}'
+main: cz.wildcraft.wildcore.WildCore
+api-version: 1.20
