@@ -3,3 +3,7 @@
 #            WildCore             #
 #                                 #
 ###################################
+ip-adress: "localhost"
+user: "root"
+password: ""
+database: ""
