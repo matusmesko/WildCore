@@ -1,0 +1,12 @@
+cz\wildcraft\wildcore\menusystem\PlayerMenuUtility.class
+cz\wildcraft\wildcore\WildCore.class
+cz\wildcraft\wildcore\warps\commands\SetServerWarpCommand.class
+cz\wildcraft\wildcore\menusystem\Menu.class
+cz\wildcraft\wildcore\warps\model\ServerWarpModel.class
+cz\wildcraft\wildcore\utils\Version.class
+cz\wildcraft\wildcore\warps\menus\ServerWarpMenu.class
+cz\wildcraft\wildcore\menusystem\PaginatedMenu.class
+cz\wildcraft\wildcore\warps\commands\WarpsCommand.class
+cz\wildcraft\wildcore\warps\database\ServerWarpTable.class
+cz\wildcraft\wildcore\utils\ColorUtil.class
+cz\wildcraft\wildcore\menusystem\MenuListener.class

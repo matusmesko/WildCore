@@ -2,6 +2,8 @@ package cz.wildcraft.wildcore;
 
 import cz.wildcraft.wildcore.menusystem.MenuListener;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
+import cz.wildcraft.wildcore.warps.commands.SetServerWarpCommand;
+import cz.wildcraft.wildcore.warps.commands.WarpsCommand;
 import cz.wildcraft.wildcore.warps.database.ServerWarpTable;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +30,8 @@ public final class WildCore extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
+        getCommand("warps").setExecutor(new WarpsCommand(serverWarpTable));
+        getCommand("setServerWarp").setExecutor(new SetServerWarpCommand(serverWarpTable));
     }
 
     @Override

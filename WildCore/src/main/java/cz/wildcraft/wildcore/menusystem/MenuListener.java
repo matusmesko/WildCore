@@ -5,9 +5,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryHolder;
 
+import java.sql.SQLException;
+
 public class MenuListener implements Listener {
     @EventHandler
-    public void onMenuClick(InventoryClickEvent e){
+    public void onMenuClick(InventoryClickEvent e) throws SQLException {
 
         InventoryHolder holder = e.getInventory().getHolder();
         //If the inventoryholder of the inventory clicked on
