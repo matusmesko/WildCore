@@ -4,6 +4,7 @@ import cz.wildcraft.wildcore.menusystem.MenuListener;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
 import cz.wildcraft.wildcore.warps.commands.SetServerWarpCommand;
 import cz.wildcraft.wildcore.warps.commands.WarpsCommand;
+import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
 import cz.wildcraft.wildcore.warps.database.ServerWarpTable;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,12 +20,15 @@ public final class WildCore extends JavaPlugin {
 
     private final ServerWarpTable serverWarpTable = new ServerWarpTable();
 
+    private final PlayerWarpTable playerWarpTable = new PlayerWarpTable();
+
     @Override
     public void onEnable() {
         plugin = this;
         loadConfig();
         try {
             this.serverWarpTable.initializeServerWarpsTable();
+            this.playerWarpTable.initializeTable();
         }catch (SQLException e) {
             e.printStackTrace();
         }
