@@ -9,5 +9,38 @@ password: "gOwZLxhofDyJN9Rc"
 database: "db_40366_wildcraft"
 
 
-no-perms: "{#FF0000>}&lWC{#E4A025<} §8§l» §cNeznámy príkaz"
-serverWarpWrongUsage: "{#FF0000>}&lWC{#E4A025<} §8§l» §cZlí argumenty! Použi /setServerWarp <jméno>"
+no-perms: "§c§lW§6§lC §8§l» §cNeznámy príkaz"
+serverWarpWrongUsage: "§c§lW§6§lC §8§l» §cZlí argumenty! Použi /setServerWarp <jméno>"
+playerWarpWrongUsage: "§c§lW§6§lC §8§l» §cZlí argumenty! Použi /setwarp <jméno>"
+playerWarpDeleteWrongUsage: "§c§lW§6§lC §8§l» §cZlí argumenty! Použi /delwarp <jméno>"
+previous-page:
+  display: "§f§lPředešlá strana"
+  item: "DARK_OAK_BUTTON"
+next-page:
+  display: "§f§lDalší"
+  item: "DARK_OAK_BUTTON"
+close-page:
+  display: "§c§lZavřít"
+  item: "BARRIER"
+
+warp-cost: 5000
+warpConfirmMenu:
+  accept:
+    item: "EMERALD_BLOCK"
+    display: "§a§lANO"
+    messageAfter: "§c§lW§6§lC §8§l» §aWarp §c%w_name% §abyl úspěšně vytvořen"
+    errorMessage: "§c§lW§6§lC §8§l» §cNemáš dostatek peněz aby sis koupil warp"
+  denied:
+    item: "REDSTONE_BLOCK"
+    display: "§c§lNE"
+
+deleteWarp:
+  warpNotFound: "§c§lW§6§lC §8§l» §cTakový warp neexistuje"
+  warpNotOwning: "§c§lW§6§lC §8§l» §cTakový warp nevlastníš"
+  accept:
+    item: "EMERALD_BLOCK"
+    display: "§a§lANO"
+    messageAfter: "§c§lW§6§lC §8§l» §aWarp §c%w_name% §abyl byl vymazán"
+  denied:
+      item: "REDSTONE_BLOCK"
+      display: "§c§lNE"

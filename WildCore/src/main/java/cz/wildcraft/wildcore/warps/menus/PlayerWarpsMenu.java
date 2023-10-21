@@ -1,10 +1,10 @@
 package cz.wildcraft.wildcore.warps.menus;
 
 import cz.wildcraft.wildcore.WildCore;
-import cz.wildcraft.wildcore.menusystem.Menu;
+import cz.wildcraft.wildcore.menusystem.PaginatedMenu;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
-import cz.wildcraft.wildcore.warps.database.ServerWarpTable;
-import cz.wildcraft.wildcore.warps.model.ServerWarpModel;
+import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
+import cz.wildcraft.wildcore.warps.model.PlayerWarpModel;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,23 +15,22 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class ServerWarpMenu extends Menu {
-    private ServerWarpTable database = new ServerWarpTable();
-    public ServerWarpMenu(PlayerMenuUtility playerMenuUtility) {
+public class PlayerWarpsMenu extends PaginatedMenu {
+    public PlayerWarpsMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
 
+    private final PlayerWarpTable database = new PlayerWarpTable();
+
     private int[] warpSlots = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44};
+
 
     @Override
     public String getMenuName() {
-        return "Seznam serverových warpů";
+        return "Seznam hráčských warpu";
     }
 
     @Override
@@ -46,17 +45,18 @@ public class ServerWarpMenu extends Menu {
         for (int slot : warpSlots) {
             if (e.getSlot() == slot) {
                 String display = item.getItemMeta().getDisplayName();
-                ServerWarpModel warp = database.findServerWarpByName(display);
+                PlayerWarpModel warp = database.findPlayerWarpByName(display);
                 World world = Bukkit.getWorld(warp.getWorld());
                 Location location = new Location(world, warp.getX(), warp.getY(), warp.getZ(), warp.getYaw(), warp.getPitch());
                 p.teleport(location);
+                warp.setVisited(warp.getVisited() + 1);
+                database.updateWarp(warp);
             }
         }
 
         if (e.getSlot() == 49) {
-            new PlayerWarpsMenu(WildCore.getPlayerMenuUtility(p)).open();
+            new ServerWarpMenu(WildCore.getPlayerMenuUtility(p)).open();
         }
-
     }
 
     @Override
@@ -65,40 +65,49 @@ public class ServerWarpMenu extends Menu {
         inventory.setItem(46, FILLER_GLASS);
         inventory.setItem(47, FILLER_GLASS);
         inventory.setItem(48, FILLER_GLASS);
+        inventory.setItem(49, FILLER_GLASS);
         inventory.setItem(50, FILLER_GLASS);
         inventory.setItem(51, FILLER_GLASS);
         inventory.setItem(52, FILLER_GLASS);
         inventory.setItem(53, FILLER_GLASS);
 
-        for (ServerWarpModel warp : database.getAllServerWarps()) {
+
+
+        List<PlayerWarpModel> warps = database.getAllPlayerWarps();
+        for (PlayerWarpModel warp : warps) {
             ItemStack item = new ItemStack(Material.valueOf(warp.getIcon()));
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(warp.getWarp_name());
-
-
             List<String> lore = new ArrayList<>();
             lore.add(" ");
             lore.add("§c| §7Název: §f" + warp.getWarp_name());
-            lore.add("§c| §7description: §f" + warp.getDescription());
+            lore.add("§c| §7Majitel: §f" + warp.getOwner());
+            lore.add("§c| §7Navštíveno: §f" + warp.getVisited() + "x");
             lore.add("§c| §7Svet: §f" + warp.getWorld());
             lore.add("§c| §7Založeno: §f" + warp.getTime_created());
             lore.add(" ");
             lore.add("§e| Klikni pro teleport");
+
             meta.setLore(lore);
             item.setItemMeta(meta);
             inventory.addItem(item);
+
+            inventory.setItem(49, serverWarpButton());
         }
 
-        ItemStack pWarps = new ItemStack(Material.REDSTONE_BLOCK);
+    }
+
+    private ItemStack serverWarpButton() {
+        ItemStack pWarps = new ItemStack(Material.DIAMOND_BLOCK);
         ItemMeta pWarpmeta = pWarps.getItemMeta();
-        pWarpmeta.setDisplayName("§c§lHráčské warpy");
+        pWarpmeta.setDisplayName("§b§lServerové warpy");
         List<String> pWarplore = new ArrayList<>();
         pWarplore.add(" ");
-        pWarplore.add("§c| §fOtevreš seznam hráčských warpů");
+        pWarplore.add("§c| §fOtevreš seznam serverových warpů");
         pWarplore.add(" ");
         pWarplore.add("§e| Klikni pro teleport");
         pWarpmeta.setLore(pWarplore);
         pWarps.setItemMeta(pWarpmeta);
-        inventory.setItem(49, pWarps);
+        return pWarps;
     }
 }

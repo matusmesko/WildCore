@@ -2,7 +2,6 @@ package cz.wildcraft.wildcore.warps.database;
 
 import cz.wildcraft.wildcore.WildCore;
 import cz.wildcraft.wildcore.warps.model.PlayerWarpModel;
-import cz.wildcraft.wildcore.warps.model.ServerWarpModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class PlayerWarpTable {
         }
     }
 
-    public PlayerWarpModel findServerWarpByName(String name) throws SQLException {
+    public PlayerWarpModel findPlayerWarpByName(String name) throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM player_warps WHERE warp_name = ?");
         statement.setString(1, name);
         ResultSet resultSet = statement.executeQuery();
@@ -94,7 +93,15 @@ public class PlayerWarpTable {
         statement.close();
     }
 
-    public List<PlayerWarpModel> getAllServerWarps() throws SQLException {
+    public void deleteWarp(PlayerWarpModel playerWarpModel) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement("DELETE FROM player_warps WHERE warp_name = ? AND owner = ?");
+        statement.setString(1, playerWarpModel.getWarp_name());
+        statement.setString(2, playerWarpModel.getOwner());
+        statement.executeUpdate();
+        statement.close();
+    }
+
+    public List<PlayerWarpModel> getAllPlayerWarps() throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM player_warps");
         ResultSet resultSet = statement.executeQuery();
         List<PlayerWarpModel> warps = new ArrayList<>();;

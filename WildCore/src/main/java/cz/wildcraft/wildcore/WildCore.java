@@ -2,11 +2,15 @@ package cz.wildcraft.wildcore;
 
 import cz.wildcraft.wildcore.menusystem.MenuListener;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
+import cz.wildcraft.wildcore.warps.commands.DeleteWarpCommand;
+import cz.wildcraft.wildcore.warps.commands.SetPlayerWarpCommand;
 import cz.wildcraft.wildcore.warps.commands.SetServerWarpCommand;
 import cz.wildcraft.wildcore.warps.commands.WarpsCommand;
 import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
 import cz.wildcraft.wildcore.warps.database.ServerWarpTable;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -18,6 +22,8 @@ public final class WildCore extends JavaPlugin {
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
+    private static Economy econ = null;
+
     private final ServerWarpTable serverWarpTable = new ServerWarpTable();
 
     private final PlayerWarpTable playerWarpTable = new PlayerWarpTable();
@@ -26,6 +32,11 @@ public final class WildCore extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         loadConfig();
+        if (!setupEconomy() ) {
+            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         try {
             this.serverWarpTable.initializeServerWarpsTable();
             this.playerWarpTable.initializeTable();
@@ -36,6 +47,8 @@ public final class WildCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         getCommand("warps").setExecutor(new WarpsCommand(serverWarpTable));
         getCommand("setServerWarp").setExecutor(new SetServerWarpCommand(serverWarpTable));
+        getCommand("setwarp").setExecutor(new SetPlayerWarpCommand());
+        getCommand("delwarp").setExecutor(new DeleteWarpCommand());
     }
 
     @Override
@@ -66,6 +79,22 @@ public final class WildCore extends JavaPlugin {
         } else {
             return playerMenuUtilityMap.get(p); //Return the object by using the provided player
         }
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    public static Economy getEconomy() {
+        return econ;
     }
 
 }

@@ -23,7 +23,7 @@ public class WarpsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player p = (Player) commandSender;
         try {
-            new ServerWarpMenu(WildCore.getPlayerMenuUtility(p), database).open();
+            new ServerWarpMenu(WildCore.getPlayerMenuUtility(p)).open();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

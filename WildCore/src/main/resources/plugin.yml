@@ -6,3 +6,5 @@ commands:
   warps:
     description: Open warps menu
   setServerWarp:
+  setwarp:
+  delwarp:
