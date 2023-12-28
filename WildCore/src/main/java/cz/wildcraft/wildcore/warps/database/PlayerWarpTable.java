@@ -111,4 +111,18 @@ public class PlayerWarpTable {
         }
         return warps;
     }
+
+    public int getPlayerCountOfWarps(String name) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement("SELECT COUNT(*) AS pocet FROM  player_warps WHERE owner = ?");
+        statement.setString(1, name);
+        ResultSet resultSet = statement.executeQuery();
+        int count;
+        if(resultSet.next()){
+            count = resultSet.getInt("pocet");
+            statement.close();
+            return count;
+        }
+        statement.close();
+        return 0;
+    }
 }

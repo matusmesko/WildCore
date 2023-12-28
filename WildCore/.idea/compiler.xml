@@ -9,8 +9,5 @@
         <module name="WildCore" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="WildCore" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

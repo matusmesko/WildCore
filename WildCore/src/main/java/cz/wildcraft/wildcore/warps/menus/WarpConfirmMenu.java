@@ -3,6 +3,7 @@ package cz.wildcraft.wildcore.warps.menus;
 import cz.wildcraft.wildcore.WildCore;
 import cz.wildcraft.wildcore.menusystem.Menu;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
+import cz.wildcraft.wildcore.utils.Utils;
 import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
 import cz.wildcraft.wildcore.warps.model.PlayerWarpModel;
 import net.milkbowl.vault.economy.Economy;
@@ -44,14 +45,17 @@ public class WarpConfirmMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) throws SQLException {
         Player p = (Player) e.getWhoClicked();
         if (e.getSlot() == 12) {
-            EconomyResponse response = eco.withdrawPlayer(p, warpCost);
-            if (response.transactionSuccess()) {
-                playerWarpTable.createWarp(playerWarpModel);
-                p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.messageAfter").replace("%w_name%", playerWarpModel.getWarp_name()));
-                p.closeInventory();
-            } else {
-                p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.errorMessage").replace("%w_name%", playerWarpModel.getWarp_name()));
-                p.closeInventory();
+            if (!p.hasPermission("wildcore.ultimate")) {
+                EconomyResponse response = eco.withdrawPlayer(p, warpCost);
+
+                if (response.transactionSuccess()) {
+                    playerWarpTable.createWarp(playerWarpModel);
+                    p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.messageAfter").replace("%w_name%", playerWarpModel.getWarp_name()));
+                    p.closeInventory();
+                } else {
+                    p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.errorMessage").replace("%w_name%", playerWarpModel.getWarp_name()));
+                    p.closeInventory();
+                }
             }
         } else if (e.getSlot() == 14) {
             p.closeInventory();

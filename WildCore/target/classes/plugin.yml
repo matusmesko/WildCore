@@ -2,9 +2,21 @@ name: WildCore
 version: '1.0'
 main: cz.wildcraft.wildcore.WildCore
 api-version: 1.20
+softdepend: [PlaceholderAPI, Vault, TokenManager,LiteBans, HeadDatabase]
 commands:
   warps:
     description: Open warps menu
   setServerWarp:
   setwarp:
   delwarp:
+    aliases: [deletewarp]
+  wildcore:
+  gender:
+  staffchat:
+    aliases: [ac,adminchat,hc]
+  kredity:
+  discord:
+    aliases: [dc]
+  store:
+    aliases: [obchod, obchodnik]
+  priroda:

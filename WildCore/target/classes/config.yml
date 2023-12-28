@@ -4,11 +4,19 @@
 #                                 #
 ###################################
 ip-adress: "mysql.hostify.cz"
-user: "db_40366_wildcraft"
-password: "gOwZLxhofDyJN9Rc"
-database: "db_40366_wildcraft"
+user: "db_32877_WildCraft"
+password: "zL3IhDj7jWVUgnmx"
+database: "db_32877_WildCraft"
+bot-token: "MTE4MzE2ODQxMDQ2OTgwMjAzNQ.GSHxuc.7Jvro8sLNWGY29QLcqbWbUQoUEikLXxGbFb-cQ"
 
+vip:
+  legendary: 79
+  ultimate: 149
+  notEnough: "§c§lW§6§lC §8§l» §cNemáš dostatek kreditů."
+  purchased: "§c§lW§6§lC §8§l» §aÚspěšně si zakoupil %item%"
 
+configReloaded: "§c§lW§6§lC §8§l» §aConfig reloaded!"
+wildcoreCommandWrongUsage: "§c§lW§6§lC §8§l» §cNeznámy príkaz použi /wildcore <argument>"
 no-perms: "§c§lW§6§lC §8§l» §cNeznámy príkaz"
 serverWarpWrongUsage: "§c§lW§6§lC §8§l» §cZlí argumenty! Použi /setServerWarp <jméno>"
 playerWarpWrongUsage: "§c§lW§6§lC §8§l» §cZlí argumenty! Použi /setwarp <jméno>"
@@ -24,6 +32,8 @@ close-page:
   item: "BARRIER"
 
 warp-cost: 5000
+warpAlreadyExist: "§c§lW§6§lC §8§l» §cWarp s tímto jménem již existuje"
+warpMaxCount: "§c§lW§6§lC §8§l» §cUž vlastníš maximální počet warpů"
 warpConfirmMenu:
   accept:
     item: "EMERALD_BLOCK"
@@ -44,3 +54,34 @@ deleteWarp:
   denied:
       item: "REDSTONE_BLOCK"
       display: "§c§lNE"
+
+chat:
+  hover-format:
+    - "§7Rank: §f%luckperms_primary_group_name%"
+    - ""
+    - "§cKlikni pro zaslání privátní zprávy"
+
+gender:
+  gender-changed: "§c§lW§6§lC §8§l» §aNyní si %gender%"
+
+kredity:
+  command-info: "§c§lW§6§lC §8§l» §7Právě máš §e%kredits% kreditů"
+
+gdpr:
+  kick: "§cByl jsi vyhozen ze serveru nebo nesouhlasíš s GDPR pokud chceš hrát na serveru musíš přijmout GDPR"
+
+staffchat:
+  symbolBool: true
+  symbol: "@"
+  soundBool: true
+  soundType: "ENTITY_VILLAGER_YES"
+  chat: "{#FF0000>}&lAC{#E4A025<} %wildcore_gender% %cmi_user_prefix% &f%name% &8&l⋙ &c%message%"
+  messages:
+    error: "§c§lW§6§lC §8§l» &7Error..."
+    noPerm: "§c§lW§6§lC §8§l» &7Nemáš dostatečné permise"
+    enable: "§c§lW§6§lC §8§l» &7Admin chat byl zapnut"
+    disable: "§c§lW§6§lC §8§l» &7Admin chat byl vypnut"
+    reload: "§c§lW§6§lC §8§l» &aReloaded"
+
+priroda:
+  message: "§c§lW§6§lC §8§l» §aByl jsi teleportován do přírody"

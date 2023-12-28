@@ -27,6 +27,7 @@ public class DeleteWarpCommand implements CommandExecutor {
                 if (warp == null) {
                     p.sendMessage(WildCore.getPlugin().getConfig().getString("deleteWarp.warpNotFound"));
                     return true;
+
                 }
                 if (!p.getName().equals(warp.getOwner())) {
                     p.sendMessage(WildCore.getPlugin().getConfig().getString("deleteWarp.warpNotOwning"));
@@ -38,7 +39,6 @@ public class DeleteWarpCommand implements CommandExecutor {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
 
         }
         return false;

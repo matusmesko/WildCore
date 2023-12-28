@@ -11,7 +11,7 @@ This pagination system was made from Jer's code sample. <3
 import cz.wildcraft.wildcore.WildCore;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import sun.reflect.generics.tree.Wildcard;
+
 
 public abstract class PaginatedMenu extends Menu{
     //Keep track of what page the menu is on

@@ -5,6 +5,7 @@ import cz.wildcraft.wildcore.menusystem.PaginatedMenu;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
 import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
 import cz.wildcraft.wildcore.warps.model.PlayerWarpModel;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -80,19 +81,20 @@ public class PlayerWarpsMenu extends PaginatedMenu {
             meta.setDisplayName(warp.getWarp_name());
             List<String> lore = new ArrayList<>();
             lore.add(" ");
-            lore.add("§c| §7Název: §f" + warp.getWarp_name());
-            lore.add("§c| §7Majitel: §f" + warp.getOwner());
-            lore.add("§c| §7Navštíveno: §f" + warp.getVisited() + "x");
-            lore.add("§c| §7Svet: §f" + warp.getWorld());
-            lore.add("§c| §7Založeno: §f" + warp.getTime_created());
+            lore.add("§c▪ §7Název: §f" + warp.getWarp_name());
+            lore.add("§c▪ §7Majitel: §f" + warp.getOwner());
+            lore.add("§c▪ §7Navštíveno: §f" + warp.getVisited() + "x");
+            lore.add("§c▪ §7Svet: §f" + warp.getWorld());
+            lore.add("§c▪ §7Založeno: §f" + warp.getTime_created());
             lore.add(" ");
-            lore.add("§e| Klikni pro teleport");
+            lore.add("§e➥ Klikni pro teleport");
 
             meta.setLore(lore);
             item.setItemMeta(meta);
             inventory.addItem(item);
 
-            inventory.setItem(49, serverWarpButton());
+            inventory.setItem(49, serverButton());
+            inventory.setItem(50, playerButton());
         }
 
     }
@@ -103,11 +105,41 @@ public class PlayerWarpsMenu extends PaginatedMenu {
         pWarpmeta.setDisplayName("§b§lServerové warpy");
         List<String> pWarplore = new ArrayList<>();
         pWarplore.add(" ");
-        pWarplore.add("§c| §fOtevreš seznam serverových warpů");
+        pWarplore.add("§c▪ §fOtevreš seznam serverových warpů");
         pWarplore.add(" ");
-        pWarplore.add("§e| Klikni pro teleport");
+        pWarplore.add("§e➥ Klikni pro zobrazení");
         pWarpmeta.setLore(pWarplore);
         pWarps.setItemMeta(pWarpmeta);
         return pWarps;
+    }
+
+    private ItemStack serverButton() {
+        HeadDatabaseAPI api = new HeadDatabaseAPI();
+        ItemStack button = api.getItemHead("8742");
+        ItemMeta meta = button.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        lore.add(" ");
+        lore.add("§c▪ §fOtevreš seznam serverových warpů");
+        lore.add(" ");
+        lore.add("§e➥ Klikni pro zobrazení");
+        meta.setLore(lore);
+        meta.setDisplayName("§b§lServerové warpy");
+        button.setItemMeta(meta);
+        return button;
+    }
+
+    private ItemStack playerButton() {
+        HeadDatabaseAPI api = new HeadDatabaseAPI();
+        ItemStack button = api.getItemHead("50239");
+        ItemMeta meta = button.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        lore.add(" ");
+        lore.add("§c▪ §fOtevreš seznam hráčských warpů");
+        lore.add(" ");
+        lore.add("§e➥ Klikni pro zobrazení");
+        meta.setLore(lore);
+        meta.setDisplayName("§c§lHráčské warpy");
+        button.setItemMeta(meta);
+        return button;
     }
 }
