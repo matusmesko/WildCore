@@ -91,10 +91,25 @@ public class VipStoreMenu extends Menu {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§a▪ §aCena: §7" + legendaryCost + " kreditů");
+        lore.add("§8● §aCena: §7" + legendaryCost + " kreditů");
         lore.add("");
-        lore.add("§a▪ §aVýhody:");
-        lore.add("§a▪ §cCOMMING SOON");
+        lore.add("§8● §aVýhody:");
+        lore.add("");
+        lore.add("§8● §7/feed");
+        lore.add("§8● §7/heal");
+        lore.add("§8● §7/back");
+        lore.add("§8● §7/sit");
+        lore.add("§8● §7/anvil");
+        lore.add("§8● §7/enchant");
+        lore.add("§8● §7/ender");
+        lore.add("§8● §7/hat");
+        lore.add("§8● §7/repair");
+        lore.add("§8● §73x /setwarpwarp");
+        lore.add("§8● §76x /sethome");
+        lore.add("§8● §75x residence");
+        lore.add("§8● §7residence 150x150");
+        lore.add("§8● §75min AFK");
+        lore.add("§8● §75 itemů /ah");
         lore.add("");
         if (balance < legendaryCost) {
             long required = legendaryCost - balance;
@@ -128,10 +143,26 @@ public class VipStoreMenu extends Menu {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§e▪ §eCena: §7" + ultimateCost + " kreditů");
+        lore.add("§8● §eCena: §7" + ultimateCost + " kreditů");
         lore.add("");
-        lore.add("§e▪ §eVýhody:");
-        lore.add("§e▪ §cCOMMING SOON");
+        lore.add("§8● §eVýhody:");
+        lore.add("");
+        lore.add("§8● §7/feed");
+        lore.add("§8● §7/heal");
+        lore.add("§8● §7/back");
+        lore.add("§8● §7/sit");
+        lore.add("§8● §7/anvil");
+        lore.add("§8● §7/enchant");
+        lore.add("§8● §7/ender");
+        lore.add("§8● §7/hat");
+        lore.add("§8● §7/repair");
+        lore.add("§8● §75x /setwarpwarp");
+        lore.add("§8● §715x /sethome");
+        lore.add("§8● §78x residence");
+        lore.add("§8● §7residence 300x300");
+        lore.add("§8● §7cena residence 0.0");
+        lore.add("§8● §7AFK bypass");
+        lore.add("§8● §710 itemů /ah");
         lore.add("");
 
         if (balance < ultimateCost) {

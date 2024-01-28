@@ -168,7 +168,7 @@ public class KeyStoreMenu extends Menu {
         List<String> lore = new ArrayList<>();
         meta.setDisplayName(ColorAPI.colorize("{#c51b17}&lWild Klíč"));
         lore.add(" ");
-        lore.add("§4▪ Cena: §7" + String.valueOf(l) + " kreditů");
+        lore.add("§8● Cena: §7" + String.valueOf(l) + " kreditů");
         lore.add("");
         if (balance < l) {
             long required = l - balance;

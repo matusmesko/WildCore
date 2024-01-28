@@ -4,10 +4,13 @@ package cz.wildcraft.wildcore.gender;
 import cz.wildcraft.wildcore.WildCore;
 import cz.wildcraft.wildcore.menusystem.Menu;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
+import cz.wildcraft.wildcore.playermenu.PlayerMenu;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.sql.SQLException;
 
@@ -46,6 +49,10 @@ public class GenderMenu extends Menu {
             p.sendMessage(WildCore.getPlugin().getConfig().getString("gender.gender-changed").replace("%gender%", "§džena"));
         }
 
+        if (e.getSlot() == 18) {
+            new PlayerMenu(WildCore.getPlayerMenuUtility(p)).open();
+        }
+
     }
 
     @Override
@@ -56,5 +63,15 @@ public class GenderMenu extends Menu {
         ItemStack female = makeItem(Material.PINK_CONCRETE, "§d§lŽena");
         inventory.setItem(12, male);
         inventory.setItem(14, female);
+        inventory.setItem(18, backButton());
+    }
+
+    private ItemStack backButton() {
+        HeadDatabaseAPI api = new HeadDatabaseAPI();
+        ItemStack button = api.getItemHead("9226");
+        ItemMeta meta = button.getItemMeta();
+        meta.setDisplayName("§7Zpět");
+        button.setItemMeta(meta);
+        return button;
     }
 }

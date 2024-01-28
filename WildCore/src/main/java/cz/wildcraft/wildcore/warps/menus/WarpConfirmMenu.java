@@ -45,9 +45,7 @@ public class WarpConfirmMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) throws SQLException {
         Player p = (Player) e.getWhoClicked();
         if (e.getSlot() == 12) {
-            if (!p.hasPermission("wildcore.ultimate")) {
                 EconomyResponse response = eco.withdrawPlayer(p, warpCost);
-
                 if (response.transactionSuccess()) {
                     playerWarpTable.createWarp(playerWarpModel);
                     p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.messageAfter").replace("%w_name%", playerWarpModel.getWarp_name()));
@@ -56,7 +54,7 @@ public class WarpConfirmMenu extends Menu {
                     p.sendMessage(WildCore.getPlugin().getConfig().getString("warpConfirmMenu.accept.errorMessage").replace("%w_name%", playerWarpModel.getWarp_name()));
                     p.closeInventory();
                 }
-            }
+
         } else if (e.getSlot() == 14) {
             p.closeInventory();
         }

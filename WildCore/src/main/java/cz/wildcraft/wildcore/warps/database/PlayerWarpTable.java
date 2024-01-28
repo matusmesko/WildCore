@@ -125,4 +125,16 @@ public class PlayerWarpTable {
         statement.close();
         return 0;
     }
+
+    public List<PlayerWarpModel> getAllPlayersWarps(String name) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM player_warps WHERE owner = ?");
+        statement.setString(1, name);
+        ResultSet resultSet = statement.executeQuery();
+        List<PlayerWarpModel> warps = new ArrayList<>();
+        while (resultSet.next()) {
+           PlayerWarpModel warp = new PlayerWarpModel(resultSet.getString("warp_name"),resultSet.getString("description"),resultSet.getString("owner"),resultSet.getInt("visited"), resultSet.getString("world"),resultSet.getString("icon"), resultSet.getString("time_created"), resultSet.getDouble("x"),resultSet.getDouble("y"), resultSet.getDouble("z"),resultSet.getFloat("yaw"),resultSet.getFloat("pitch"));
+            warps.add(warp);
+        }
+        return warps;
+    }
 }

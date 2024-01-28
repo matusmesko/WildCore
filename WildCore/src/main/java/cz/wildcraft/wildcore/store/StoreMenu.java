@@ -3,6 +3,8 @@ package cz.wildcraft.wildcore.store;
 import cz.wildcraft.wildcore.WildCore;
 import cz.wildcraft.wildcore.menusystem.Menu;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
+import cz.wildcraft.wildcore.playermenu.PlayerMenu;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -37,6 +39,10 @@ public class StoreMenu extends Menu {
             new VipStoreMenu(WildCore.getPlayerMenuUtility(p)).open();
         }else if (e.getSlot() == 14) {
             new KeyStoreMenu(WildCore.getPlayerMenuUtility(p)).open();
+        } else if (e.getSlot() == 18) {
+            new PlayerMenu(WildCore.getPlayerMenuUtility(p)).open();
+        }else if (e.getSlot() == 4) {
+            storeMessage(p);
         }
     }
 
@@ -46,6 +52,8 @@ public class StoreMenu extends Menu {
         // 12 14 4
         inventory.setItem(12, vipRanks());
         inventory.setItem(14, keys());
+        inventory.setItem(18, backButton());
+        inventory.setItem(4, info());
     }
 
     private ItemStack vipRanks() {
@@ -53,8 +61,8 @@ public class StoreMenu extends Menu {
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§e▪ §7Tady si můžeš koupit");
-        lore.add("§e▪ §7všechny vip ranky");
+        lore.add("§8● §7Tady si můžeš koupit");
+        lore.add("§8● §7všechny vip ranky");
         meta.setLore(lore);
         meta.setDisplayName("§e§lVIP Ranky");
         meta.addEnchant(Enchantment.LURE,3, true);
@@ -68,13 +76,44 @@ public class StoreMenu extends Menu {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§a▪ §7Tady si můžeš koupit");
-        lore.add("§a▪ §7všechny klíče");
+        lore.add("§8● §7Tady si můžeš koupit");
+        lore.add("§8● §7všechny klíče");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LURE,3, true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.setDisplayName("§a§lKlíče");
         item.setItemMeta(meta);
         return item;
+    }
+
+    private ItemStack backButton() {
+        HeadDatabaseAPI api = new HeadDatabaseAPI();
+        ItemStack button = api.getItemHead("9226");
+        ItemMeta meta = button.getItemMeta();
+        meta.setDisplayName("§7Zpět");
+        button.setItemMeta(meta);
+        return button;
+    }
+
+    private ItemStack info() {
+        ItemStack item = new ItemStack(Material.BOOK);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§e§lJak získat kredity ?");
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("§fKredity můžeš získat hraním, s truhly");
+        lore.add("§fnebo si je můžeš zakoupit v našem obchodě");
+        lore.add("");
+        lore.add("§e➥ Klikni pro nákup");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private void storeMessage(Player p) {
+        p.sendMessage("");
+        p.sendMessage("§e| §7Tady si můžeš zakoupit kredity");
+        p.sendMessage("§e| https://wildcraftcz.craftingstore.net/category/417000");
+        p.sendMessage("");
     }
 }

@@ -14,7 +14,10 @@ import cz.wildcraft.wildcore.joinandleave.JoinLeaveListener;
 import cz.wildcraft.wildcore.menusystem.MenuListener;
 import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
 import cz.wildcraft.wildcore.placeholders.WildCorePlaceholder;
+import cz.wildcraft.wildcore.playermenu.PlayerMenuCommand;
 import cz.wildcraft.wildcore.staffchat.*;
+import cz.wildcraft.wildcore.vote.VoteCommand;
+import cz.wildcraft.wildcore.vote.VoteListener;
 import cz.wildcraft.wildcore.warps.commands.DeleteWarpCommand;
 import cz.wildcraft.wildcore.warps.commands.SetPlayerWarpCommand;
 import cz.wildcraft.wildcore.warps.commands.SetServerWarpCommand;
@@ -115,6 +118,7 @@ public final class WildCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GdprListener2(), this);
         getServer().getPluginManager().registerEvents(new ChatWebhook(), this);
         getServer().getPluginManager().registerEvents(new StaffChatListener(), this);
+        getServer().getPluginManager().registerEvents(new VoteListener(), this);
         getCommand("warps").setExecutor(new WarpsCommand(serverWarpTable));
         getCommand("setServerWarp").setExecutor(new SetServerWarpCommand(serverWarpTable));
         getCommand("setwarp").setExecutor(new SetPlayerWarpCommand());
@@ -128,6 +132,9 @@ public final class WildCore extends JavaPlugin {
         getCommand("discord").setExecutor(new DiscordCommand());
         getCommand("store").setExecutor(new StoreCommand());
         getCommand("priroda").setExecutor(new PrirodaCommand());
+        getCommand("menu").setExecutor(new PlayerMenuCommand());
+        getCommand("pl").setExecutor(new PluginsCommand());
+        getCommand("vote").setExecutor(new VoteCommand());
     }
 
     @Override
