@@ -47,6 +47,23 @@ public class WildCorePlaceholder extends PlaceholderExpansion {
             }else {
                 return "§aGLOBAL";
             }
+        }else if (params.equalsIgnoreCase("chatVotes")) {
+            try {
+                String gender = Utils.getGenderToString((Player) player, plugin.getGenderTable());
+                if (gender.equals("male")) {
+                    return "§7Hlasoval: §f" + plugin.getVoteTable().getPlayerVotes(player.getName() + "x");
+                }else {
+                    return "§7Hlasovala: §f" + plugin.getVoteTable().getPlayerVotes(player.getName() + "x");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else if (params.equalsIgnoreCase("playerVotes")) {
+            try {
+                return "" + plugin.getVoteTable().getPlayerVotes(player.getName());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
 

@@ -26,12 +26,18 @@ public class JoinLeaveListener implements Listener {
         }else {
             e.setJoinMessage("§e§l→ §7" + p.getName());
         }
+        /*
+        p.sendMessage("");
+        p.sendMessage("§c| §7Vítej §c" + p.getName() + " §7na serveru!");
+        p.sendMessage("§c| §7Příroda: §c/priroda");
+        p.sendMessage("§c| §7Menu: §c/menu");
+        */
 
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        e.setQuitMessage("§c§l← §f" + p.getName());
+        e.setQuitMessage("§c§l← §7" + p.getName());
     }
 }

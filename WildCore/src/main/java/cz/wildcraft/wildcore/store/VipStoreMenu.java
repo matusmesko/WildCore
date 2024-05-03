@@ -110,6 +110,7 @@ public class VipStoreMenu extends Menu {
         lore.add("§8● §7residence 150x150");
         lore.add("§8● §75min AFK");
         lore.add("§8● §75 itemů /ah");
+        lore.add("§8● §7/vault (27 slotů)");
         lore.add("");
         if (balance < legendaryCost) {
             long required = legendaryCost - balance;
@@ -160,9 +161,9 @@ public class VipStoreMenu extends Menu {
         lore.add("§8● §715x /sethome");
         lore.add("§8● §78x residence");
         lore.add("§8● §7residence 300x300");
-        lore.add("§8● §7cena residence 0.0");
         lore.add("§8● §7AFK bypass");
         lore.add("§8● §710 itemů /ah");
+        lore.add("§8● §7/vault (54 slotů)");
         lore.add("");
 
         if (balance < ultimateCost) {

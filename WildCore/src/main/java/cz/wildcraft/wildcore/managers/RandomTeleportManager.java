@@ -11,8 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomTeleportManager {
 
-    int radiusX = 2000;
-    int radiusZ = 2000;
+    int radiusX = 5000;
+    int radiusZ = 5000;
 
     public  void randomTeleportPlayer (Player player) {
         Location location = getRandomLocation(player);

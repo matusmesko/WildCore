@@ -21,4 +21,15 @@ public class Utils {
         return format;
     }
 
+    public static String getGenderToString(Player player, GenderTable genderTable) throws SQLException {
+        GenderModel gender = genderTable.findPlayerByName(player.getName());
+        String format = "";
+        if (gender.getGender().equalsIgnoreCase("male")) {
+            format = "male";
+        }else {
+            format = "female";
+        }
+        return format;
+    }
+
 }

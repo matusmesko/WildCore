@@ -16,12 +16,13 @@ import cz.wildcraft.wildcore.menusystem.PlayerMenuUtility;
 import cz.wildcraft.wildcore.placeholders.WildCorePlaceholder;
 import cz.wildcraft.wildcore.playermenu.PlayerMenuCommand;
 import cz.wildcraft.wildcore.staffchat.*;
+import cz.wildcraft.wildcore.task.InfoMessages;
+import cz.wildcraft.wildcore.vault.VaultCommand;
+import cz.wildcraft.wildcore.vault.VaultListener;
 import cz.wildcraft.wildcore.vote.VoteCommand;
 import cz.wildcraft.wildcore.vote.VoteListener;
-import cz.wildcraft.wildcore.warps.commands.DeleteWarpCommand;
-import cz.wildcraft.wildcore.warps.commands.SetPlayerWarpCommand;
-import cz.wildcraft.wildcore.warps.commands.SetServerWarpCommand;
-import cz.wildcraft.wildcore.warps.commands.WarpsCommand;
+import cz.wildcraft.wildcore.vote.VoteTable;
+import cz.wildcraft.wildcore.warps.commands.*;
 import cz.wildcraft.wildcore.warps.database.PlayerWarpTable;
 import cz.wildcraft.wildcore.warps.database.ServerWarpTable;
 import me.realized.tokenmanager.api.TokenManager;
@@ -34,8 +35,10 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -62,6 +65,8 @@ public final class WildCore extends JavaPlugin {
     private final GenderTable genderTable = new GenderTable();
     private final GdprTable gdprTable = new GdprTable();
 
+    private final VoteTable voteTable = new VoteTable();
+
     private JDA jda;
 
     private String botToken = getConfig().getString("bot-token");
@@ -82,6 +87,7 @@ public final class WildCore extends JavaPlugin {
             this.playerWarpTable.initializeTable();
             this.genderTable.initializeTable();
             this.gdprTable.initializeTable();
+            this.voteTable.initializeTable();
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,6 +125,7 @@ public final class WildCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChatWebhook(), this);
         getServer().getPluginManager().registerEvents(new StaffChatListener(), this);
         getServer().getPluginManager().registerEvents(new VoteListener(), this);
+        getServer().getPluginManager().registerEvents(new VaultListener(), this);
         getCommand("warps").setExecutor(new WarpsCommand(serverWarpTable));
         getCommand("setServerWarp").setExecutor(new SetServerWarpCommand(serverWarpTable));
         getCommand("setwarp").setExecutor(new SetPlayerWarpCommand());
@@ -135,6 +142,11 @@ public final class WildCore extends JavaPlugin {
         getCommand("menu").setExecutor(new PlayerMenuCommand());
         getCommand("pl").setExecutor(new PluginsCommand());
         getCommand("vote").setExecutor(new VoteCommand());
+        getCommand("vault").setExecutor(new VaultCommand());
+        getCommand("oznameni").setExecutor(new BroadcastCommand());
+        getCommand("warp").setExecutor(new WarpCommand());
+        getCommand("profile").setExecutor(new ProfileCommand());
+        BukkitTask messagesTask = (new InfoMessages()).runTaskTimer((Plugin)this, 0L, 20L * getPlugin().getConfig().getLong("timerMessages"));
     }
 
     @Override
@@ -213,5 +225,7 @@ public final class WildCore extends JavaPlugin {
         return jda.getTextChannelById("1187723139086569564");
     }
 
-
+    public VoteTable getVoteTable() {
+        return voteTable;
+    }
 }

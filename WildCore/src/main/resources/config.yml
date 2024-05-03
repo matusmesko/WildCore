@@ -85,3 +85,10 @@ staffchat:
 
 priroda:
   message: "§c§lW§6§lC §8§l» §aByl jsi teleportován do přírody"
+
+taskMessages:
+  - "§c§lW§6§lC §8§l» §7Na serveru máme k dispozici aukce! Dostaneš se to nich příkazem §c/ah"
+  - "§c§lW§6§lC §8§l» §7Nezapomeň zahlasovat pro náš server a získej skvělé odměny! §c/vote"
+  - "§c§lW§6§lC §8§l» §7Suroviny u nás lze zakoupit v obchodě! Dostaneš se příkazem §c/shop"
+
+timerMessages: 300

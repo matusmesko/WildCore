@@ -24,3 +24,7 @@ commands:
   pl:
     aliases: [plugins,plugin]
   vote:
+  vault:
+  oznameni:
+  warp:
+  profile:

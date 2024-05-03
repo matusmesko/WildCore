@@ -43,6 +43,9 @@ public class StoreMenu extends Menu {
             new PlayerMenu(WildCore.getPlayerMenuUtility(p)).open();
         }else if (e.getSlot() == 4) {
             storeMessage(p);
+            p.closeInventory();
+        }else if (e.getSlot() == 13) {
+            new VehicleStoreMenu(WildCore.getPlayerMenuUtility(p)).open();
         }
     }
 
@@ -51,6 +54,7 @@ public class StoreMenu extends Menu {
         setFillerGlass();
         // 12 14 4
         inventory.setItem(12, vipRanks());
+        inventory.setItem(13, vehicles());
         inventory.setItem(14, keys());
         inventory.setItem(18, backButton());
         inventory.setItem(4, info());
@@ -101,8 +105,23 @@ public class StoreMenu extends Menu {
         meta.setDisplayName("§e§lJak získat kredity ?");
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§fKredity můžeš získat hraním, s truhly");
-        lore.add("§fnebo si je můžeš zakoupit v našem obchodě");
+        lore.add("§8● §7Kredity můžeš získat hraním, s truhly");
+        lore.add("§8● §7nebo je můžeš zakoupit v našem obchodě");
+        lore.add("");
+        lore.add("§e➥ Klikni pro nákup");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private ItemStack vehicles() {
+        ItemStack item = new ItemStack(Material.MINECART);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§d§lVozidla");
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("§8● §7Tady si můžeš koupit");
+        lore.add("§8● §7všechny vozidla");
         lore.add("");
         lore.add("§e➥ Klikni pro nákup");
         meta.setLore(lore);

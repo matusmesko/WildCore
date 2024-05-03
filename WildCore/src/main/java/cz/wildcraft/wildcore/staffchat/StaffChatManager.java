@@ -46,17 +46,19 @@ public class StaffChatManager {
         }
         String message = messageBuilder.toString();
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (players.hasPermission("staffChat.see"))
+            if (players.hasPermission("staffChat.see")) {
                 playSoundToPlayer(players);
-            spigot.getMessages().sendListMessagesSpigot(players, sender, "staffchat.chat", message);
+                spigot.getMessages().sendListMessagesSpigot(players, sender, "staffchat.chat", message);
+            }
         }
     }
 
     public void sendStaffMessage(Player sender, String message) {
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (players.hasPermission("staffChat.see") || players.hasPermission("staffChat.admin"))
+            if (players.hasPermission("staffChat.see") || players.hasPermission("staffChat.admin")) {
                 playSoundToPlayer(players);
-            spigot.getMessages().sendListMessagesSpigot(players, sender, "staffchat.chat", message);
+                spigot.getMessages().sendListMessagesSpigot(players, sender, "staffchat.chat", message);
+            }
         }
     }
 
